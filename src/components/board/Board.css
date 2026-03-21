@@ -1,0 +1,65 @@
+/* O contêiner principal do jogo */
+.board-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 288 / 208;
+  margin: 0 auto;
+  /* border-radius: 16px; <-- Removido para deixar os cantos quadrados! */
+  overflow: hidden; 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* O fundo do jogo */
+.board-bg {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; 
+  image-rendering: pixelated; /* Garantindo que o cenário fique nítido também! */
+}
+
+/* A camada onde ficam os itens (Vidas, Animal, Texto) */
+.board-ui {
+  position: relative;
+  z-index: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  height: 100%;
+  /* Removi o padding: 24px que existia aqui para a lifebar poder colar no topo */
+  box-sizing: border-box;
+}
+
+/* Topo: Barra de Vidas */
+.top-bar {
+  display: flex;
+  justify-content: center; 
+  width: 100%;
+  /* Se o pixel art original da moldura tiver um espacinho do topo, 
+     você pode adicionar um margin-top aqui depois. Por enquanto é zero. */
+}
+
+/* A Mágica da Proporção: Garante que a vida tenha exatamente 239px em relação aos 288px do fundo */
+.top-bar > div {
+  width: 82.986%; /* Resultado de (239 / 288) * 100 */
+}
+
+/* Meio: O Animal */
+.center-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1; 
+}
+
+/* Base: Campo de digitação */
+.bottom-bar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; 
+  padding-bottom: 24px; /* Mantive um respiro só embaixo para o texto não bater na borda da tela */
+}

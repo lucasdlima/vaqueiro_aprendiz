@@ -1,0 +1,32 @@
+:root {
+  --bg: #fff;
+  --border: #e5e4e7;
+  
+  color-scheme: light dark;
+  background: var(--bg);
+}
+
+/* Mantém o fundo escuro automático se o sistema do usuário estiver no modo escuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16171d;
+    --border: #2e303a;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+/* Mantém o seu layout centralizado em formato de "bloco" */
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto; /* Isso é o que centraliza o bloco na tela */
+  text-align: center;
+  border-inline: 1px solid var(--border); /* As bordas laterais sutis */
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}

@@ -1,0 +1,12 @@
+.animal-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pixel-art-image {
+  /* Mantém os pixels 100% nítidos */
+  image-rendering: pixelated; 
+  max-width: 40%;
+  height: auto;
+}
