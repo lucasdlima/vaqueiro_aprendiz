@@ -2,59 +2,64 @@ import React, { useState, useRef } from "react";
 import "./WordInput.css";
 
 interface WordInputProps {
-  targetWord: string; // A palavra que o usuário deve digitar (ex: "bode")
-  onComplete?: (isCorrect: boolean) => void; 
+  targetWord: string; 
+  onSuccess?: () => void; // Dispara quando a palavra inteira estiver certa
+  onError?: () => void;   // Dispara cada vez que errar uma letra
 }
 
-const WordInput = ({ targetWord, onComplete }: WordInputProps) => {
-  // Guarda o que o usuário já digitou
+const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
   const [typed, setTyped] = useState("");
-  
-  // Referência para o input invisível
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toLowerCase(); // Ignora maiúsculas/minúsculas
+    const value = e.target.value.toLowerCase(); 
     
-    // Só permite digitar até o tamanho máximo da palavra
+    // Verifica se o usuário ADICIONOU uma letra (em vez de usar o backspace para apagar)
+    if (value.length > typed.length) {
+      // Pega a última letra que ele acabou de digitar
+      const addedChar = value[value.length - 1];
+      // Pega a letra correta correspondente àquela posição
+      const expectedChar = targetWord[value.length - 1];
+      
+      // Se a letra for errada, dispara o erro na mesma hora!
+      if (addedChar !== expectedChar && onError) {
+        onError();
+      }
+    }
+
+    // Atualiza o estado para mostrar a letra na tela (mesmo que seja vermelha)
     if (value.length <= targetWord.length) {
       setTyped(value);
       
-      // Se digitou a última letra, podemos disparar um evento para o jogo saber
-      if (value.length === targetWord.length && onComplete) {
-        const isPerfect = value === targetWord;
-        onComplete(isPerfect);
+      // Se a palavra digitada for perfeitamente igual à palavra alvo, ele passa de fase
+      if (value === targetWord && onSuccess) {
+        onSuccess();
       }
     }
   };
 
-  // Se o usuário clicar na área da palavra, foca no input invisível para abrir o teclado
   const handleClick = () => {
     inputRef.current?.focus();
   };
 
   return (
     <div className="word-input-container" onClick={handleClick}>
-      {/* O input real fica escondido, mas é ele que captura o teclado do celular/PC */}
       <input
         ref={inputRef}
         type="text"
         value={typed}
         onChange={handleChange}
         className="hidden-input"
-        autoFocus // Já foca automaticamente quando a tela carrega
+        autoFocus 
       />
 
-      {/* Aqui é onde desenhamos a palavra letra por letra */}
       <div className="stylized-word">
         {targetWord.split("").map((char, index) => {
-          let statusClass = "pending"; // Padrão: Branca (ainda não chegou nela)
+          let statusClass = "pending"; 
 
           if (index < typed.length) {
-            // Letras que já foram digitadas
             statusClass = typed[index] === char ? "correct" : "incorrect";
           } else if (index === typed.length) {
-            // A exata próxima letra a ser digitada
             statusClass = "active";
           }
 
