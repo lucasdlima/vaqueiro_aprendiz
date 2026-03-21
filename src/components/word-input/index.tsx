@@ -3,8 +3,8 @@ import "./WordInput.css";
 
 interface WordInputProps {
   targetWord: string; 
-  onSuccess?: () => void; // Dispara quando a palavra inteira estiver certa
-  onError?: () => void;   // Dispara cada vez que errar uma letra
+  onSuccess?: () => void; 
+  onError?: () => void;   
 }
 
 const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
@@ -14,26 +14,26 @@ const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase(); 
     
-    // Verifica se o usuário ADICIONOU uma letra (em vez de usar o backspace para apagar)
-    if (value.length > typed.length) {
-      // Pega a última letra que ele acabou de digitar
-      const addedChar = value[value.length - 1];
-      // Pega a letra correta correspondente àquela posição
-      const expectedChar = targetWord[value.length - 1];
-      
-      // Se a letra for errada, dispara o erro na mesma hora!
-      if (addedChar !== expectedChar && onError) {
-        onError();
-      }
-    }
-
-    // Atualiza o estado para mostrar a letra na tela (mesmo que seja vermelha)
+    // Só aceita digitar até o limite de letras da palavra
     if (value.length <= targetWord.length) {
       setTyped(value);
       
-      // Se a palavra digitada for perfeitamente igual à palavra alvo, ele passa de fase
-      if (value === targetWord && onSuccess) {
-        onSuccess();
+      // Verifica se o jogador preencheu todos os espaços da palavra
+      if (value.length === targetWord.length) {
+        
+        if (value === targetWord) {
+          // 1. Palavra completa e CORRETA
+          if (onSuccess) onSuccess();
+        } else {
+          // 2. Palavra completa, mas ERRADA
+          if (onError) onError(); // Dispara a função para perder 1 vida
+          
+          // Usa um setTimeout para esperar 400 milissegundos antes de apagar.
+          // Assim o jogador tem tempo de ver que a última letra ficou vermelha!
+          setTimeout(() => {
+            setTyped("");
+          }, 400);
+        }
       }
     }
   };
