@@ -61,5 +61,8 @@
   display: flex;
   justify-content: center;
   align-items: flex-end; 
-  padding-bottom: 24px; /* Mantive um respiro só embaixo para o texto não bater na borda da tela */
+  
+  /* AUMENTE este valor (ex: 20px) para empurrar o teclado mais para CIMA. */
+  /* DIMINUA este valor (ex: 0px) para colar o teclado mais perto da borda de BAIXO. */
+  padding-bottom: 60px; 
 }

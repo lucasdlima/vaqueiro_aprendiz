@@ -2,10 +2,12 @@
   position: relative;
   display: inline-block;
   cursor: text;
-  padding: 16px 24px;
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro para destacar as letras */
-  border-radius: 12px;
-  margin-top: 20px;
+  /* Reduzimos o padding para a caixa não ocupar muito espaço vertical */
+  padding: 8px 20px; 
+  background-color: rgba(0, 0, 0, 0.6); 
+  border-radius: 8px; /* Cantos um pouco mais retos para combinar com pixel art */
+  margin-top: 10px; /* Menos margem no topo */
+  border-bottom: 3px solid rgba(0, 0, 0, 0.8); /* Um efeitinho 3D na caixa */
 }
 
 /* Esconde o input real, mas mantém ele funcional na tela */
@@ -20,33 +22,39 @@
 .stylized-word {
   display: flex;
   gap: 4px;
-  font-family: ui-monospace, Consolas, monospace; /* Fonte monoespaçada fica melhor para digitação */
-  font-size: 48px;
+  font-family: ui-monospace, Consolas, monospace; 
+  /* Diminuímos a fonte de 48px para 32px. Fica bem mais proporcional à tela! */
+  font-size: 32px; 
   font-weight: bold;
-  text-transform: uppercase; /* Deixa tudo maiúsculo no visual */
+  text-transform: uppercase; 
+  /* Adiciona uma sombra dura atrás do texto, típica de jogos antigos */
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.9); 
 }
 
 /* Animação suave na troca de cores */
 .char {
-  transition: color 0.2s ease, transform 0.1s ease;
-  min-width: 30px;
+  /* Deixei a transição um pouquinho mais rápida (0.1s) para a digitação parecer mais responsiva */
+  transition: color 0.1s ease, transform 0.1s ease;
+  min-width: 24px; /* Acompanha a redução da fonte */
   text-align: center;
 }
 
-/* As regras de cores que você pediu: */
+/* As regras de cores */
 
 /* 1. Letras ainda não digitadas (Branco) */
 .char.pending {
   color: #ffffff;
-  opacity: 0.5; /* Um pouco apagada para focar na letra ativa */
+  opacity: 0.6; 
 }
 
-/* 2. Próxima letra a ser digitada (Colorida - Escolhi um Amarelo/Dourado) */
+/* 2. Próxima letra a ser digitada (Amarelo) */
 .char.active {
   color: #fbbf24; 
   opacity: 1;
-  text-decoration: underline; /* Um sublinhado para ajudar a indicar de quem é a vez */
-  transform: scale(1.1); /* Dá uma leve aumentada na letra atual */
+  text-decoration: underline; 
+  text-decoration-thickness: 3px; /* Deixa o sublinhado mais gordinho */
+  text-underline-offset: 4px; /* Afasta o sublinhado da letra */
+  transform: scale(1.15); /* Aumentei levemente o pulo da letra atual */
 }
 
 /* 3. Digitou certo (Verde) */

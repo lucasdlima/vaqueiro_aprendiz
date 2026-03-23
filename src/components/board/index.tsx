@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import './Board.css';
 
 import bgImage from '../../assets/bg_288x208.png';
+import borda from '../../assets/borda.png';
 import Animal, { AnimalType } from "../animal";
 import LifeBar from "../lifebar";
 import WordInput from "../word-input";
 import ResultScreen from "../result-screen";
 
-const animalSequence: AnimalType[] = ['bode', 'vaca', 'tatu'];
+const animalSequence: AnimalType[] = ['bode', 'vaca', 'tatu', 'sapo'];
 
 const Board = () => {
   const [lives, setLives] = useState(10);
@@ -46,7 +47,7 @@ const Board = () => {
   return (
     <div className="board-container">
       <img src={bgImage} alt="Cenário do jogo" className="board-bg" />
-
+      <img src={borda} alt="Borda decorativa" className="board-bg" />
       <div className="board-ui">
         
         {gameState !== 'playing' && (

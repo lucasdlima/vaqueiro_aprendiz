@@ -1,0 +1,68 @@
+.keyboard-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  position: relative; 
+  width: 100%;
+}
+
+.keyboard-layout {
+  display: flex;
+  flex-direction: column;
+  /* 1. ESPAÇO ENTRE AS LINHAS: Diminua aqui para grudar mais as linhas (era 6px) */
+  gap: 4px; 
+  background-color: rgba(0, 0, 0, 0.4);
+  /* 2. BORDA DO TECLADO: Diminua aqui para a caixa preta ficar mais justa (era 16px) */
+  padding: 10px 14px; 
+  border-radius: 12px;
+}
+
+.keyboard-row {
+  display: flex;
+  /* 3. ESPAÇO ENTRE AS TECLAS: Diminua aqui para aproximar as teclas lado a lado (era 6px) */
+  gap: 4px; 
+  justify-content: center;
+}
+
+/* Cria o recuo natural das linhas do teclado (Ajustado para o novo tamanho) */
+.row-1 { margin-left: 10px; } 
+.row-2 { margin-left: 0px; } 
+
+.key {
+  /* 4. TAMANHO DA TECLA: Aqui é onde a mágica acontece! (Eram 36px) */
+  width: 32px; 
+  height: 32px; 
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2e303a;
+  color: #6b6375;
+  border-radius: 4px; /* Deixei os cantinhos um pouco mais quadrados */
+  font-family: ui-monospace, Consolas, monospace;
+  
+  /* 5. TAMANHO DA LETRA: Reduza se a tecla ficar muito pequena (era 16px) */
+  font-size: 14px; 
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  
+  /* Reduzi o efeito 3D para acompanhar o tamanho menor da tecla */
+  border-bottom: 2px solid #1a1a24; 
+}
+
+/* O estilo da tecla que o jogador PRECISA apertar */
+.key.target {
+  color: #000;
+  font-weight: bold;
+  background-color: #fbbf24; 
+  border-bottom-color: #b4850c; 
+  transform: translateY(-2px); 
+  animation: pulseTarget 1.5s infinite;
+}
+
+/* Animação de pulso para chamar a atenção */
+@keyframes pulseTarget {
+  0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(251, 191, 36, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+}

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./WordInput.css";
+import Keyboard from "../keyboard"; // Importa o nosso novo teclado simples
 
 interface WordInputProps {
   targetWord: string; 
@@ -14,25 +15,15 @@ const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase(); 
     
-    // Só aceita digitar até o limite de letras da palavra
     if (value.length <= targetWord.length) {
       setTyped(value);
       
-      // Verifica se o jogador preencheu todos os espaços da palavra
       if (value.length === targetWord.length) {
-        
         if (value === targetWord) {
-          // 1. Palavra completa e CORRETA
           if (onSuccess) onSuccess();
         } else {
-          // 2. Palavra completa, mas ERRADA
-          if (onError) onError(); // Dispara a função para perder 1 vida
-          
-          // Usa um setTimeout para esperar 400 milissegundos antes de apagar.
-          // Assim o jogador tem tempo de ver que a última letra ficou vermelha!
-          setTimeout(() => {
-            setTyped("");
-          }, 400);
+          if (onError) onError(); 
+          setTimeout(() => setTyped(""), 400);
         }
       }
     }
@@ -42,34 +33,46 @@ const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
     inputRef.current?.focus();
   };
 
+  // Descobre qual é a próxima letra (se a palavra já estiver completa, passa 'undefined')
+  const nextExpectedChar = typed.length < targetWord.length 
+    ? targetWord[typed.length] 
+    : undefined;
+
   return (
-    <div className="word-input-container" onClick={handleClick}>
-      <input
-        ref={inputRef}
-        type="text"
-        value={typed}
-        onChange={handleChange}
-        className="hidden-input"
-        autoFocus 
-      />
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      
+      <div className="word-input-container" onClick={handleClick}>
+        <input
+          ref={inputRef}
+          type="text"
+          value={typed}
+          onChange={handleChange}
+          className="hidden-input"
+          autoFocus 
+        />
 
-      <div className="stylized-word">
-        {targetWord.split("").map((char, index) => {
-          let statusClass = "pending"; 
+        <div className="stylized-word">
+          {targetWord.split("").map((char, index) => {
+            let statusClass = "pending"; 
 
-          if (index < typed.length) {
-            statusClass = typed[index] === char ? "correct" : "incorrect";
-          } else if (index === typed.length) {
-            statusClass = "active";
-          }
+            if (index < typed.length) {
+              statusClass = typed[index] === char ? "correct" : "incorrect";
+            } else if (index === typed.length) {
+              statusClass = "active";
+            }
 
-          return (
-            <span key={index} className={`char ${statusClass}`}>
-              {char}
-            </span>
-          );
-        })}
+            return (
+              <span key={index} className={`char ${statusClass}`}>
+                {char}
+              </span>
+            );
+          })}
+        </div>
       </div>
+
+      {/* Renderiza o teclado simples, passando a letra alvo */}
+      <Keyboard nextChar={nextExpectedChar} />
+      
     </div>
   );
 };
