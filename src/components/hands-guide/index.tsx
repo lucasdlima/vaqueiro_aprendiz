@@ -1,37 +1,41 @@
 import React from "react";
 import "./HandsGuide.css";
 
-// IMPORTANTE: Atualize aqui com os nomes das suas NOVAS imagens das mãos inteiras
 import handLeft from "../../assets/hands/hand_esq.png"; 
 import handRight from "../../assets/hands/hand_dir.png";
 
 interface HandsGuideProps {
-  activeFingerId?: string; // Ex: 'pinky-l', 'index-r'
+  activeFingerId?: string; 
+  // 1. RECEBE A COR AQUI
+  activeFingerColor?: string; 
 }
 
-const HandsGuide = ({ activeFingerId }: HandsGuideProps) => {
-  // Verifica de qual mão é o dedo atual
+const HandsGuide = ({ activeFingerId, activeFingerColor }: HandsGuideProps) => {
   const isLeftHand = activeFingerId?.endsWith('-l');
   const isRightHand = activeFingerId?.endsWith('-r');
+
+  // 2. CRIA O ESTILO DA BOLINHA COM A COR EXATA
+  const dotStyle = {
+    backgroundColor: activeFingerColor,
+    boxShadow: `0 0 10px ${activeFingerColor}, 0 0 20px ${activeFingerColor}`
+  };
 
   return (
     <div className="hands-guide-container">
       
-      {/* Mão Esquerda */}
       <div className="hand-wrapper left">
         <img src={handLeft} alt="Mão Esquerda" className="hand-image" />
-        {/* Renderiza o ponto brilhante apenas se o dedo ativo for desta mão */}
         {isLeftHand && (
-          <div className={`finger-dot pos-${activeFingerId}`}></div>
+          // 3. APLICA A COR NA BOLINHA
+          <div className={`finger-dot pos-${activeFingerId}`} style={dotStyle}></div>
         )}
       </div>
 
-      {/* Mão Direita */}
       <div className="hand-wrapper right">
         <img src={handRight} alt="Mão Direita" className="hand-image" />
-        {/* Renderiza o ponto brilhante apenas se o dedo ativo for desta mão */}
         {isRightHand && (
-          <div className={`finger-dot pos-${activeFingerId}`}></div>
+          // 3. APLICA A COR NA BOLINHA
+          <div className={`finger-dot pos-${activeFingerId}`} style={dotStyle}></div>
         )}
       </div>
 

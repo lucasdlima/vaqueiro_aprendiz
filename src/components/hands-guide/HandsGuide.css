@@ -6,7 +6,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between; 
-  padding: 0 10px; /* Margem das laterais do teclado */
+  padding: 0 10px; 
   box-sizing: border-box;
   pointer-events: none; 
   z-index: 5;
@@ -15,67 +15,49 @@
 /* 2. BASE DA MÃO */
 .hand-wrapper {
   position: relative;
-  
-  /* ---> ATENÇÃO AQUI <--- 
-     Coloque as dimensões EXATAS da sua nova sprite da mão inteira! */
   width: 93px;  
   height: 42px; 
-  
-  /* Escala para deixar a mão grande no jogo */
   transform: scale(2.2); 
-  transform-origin: top center; /* Garante que ela cresça para baixo */
+  transform-origin: top center; 
 }
 
-/* Empurra a mão esquerda mais para a esquerda */
-.hand-wrapper.left {
-  left: -40px; /* Aumente esse número negativo (ex: -40px, -50px) para afastar mais */
-}
-
-/* Empurra a mão direita mais para a direita */
-.hand-wrapper.right {
-  left: 40px; /* Aumente esse número positivo (ex: 40px, 50px) para afastar mais */
-}
+.hand-wrapper.left { left: -40px; }
+.hand-wrapper.right { left: 40px; }
 
 .hand-image {
   width: 100%;
   height: 100%;
-  image-rendering: pixelated; /* Mantém a nitidez */
+  image-rendering: pixelated; 
   display: block;
 }
 
 /* 3. O CÍRCULO INDICADOR (O Ponto Brilhante) */
 .finger-dot {
   position: absolute;
-  width: 5px; /* Tamanho da bolinha */
+  width: 5px; 
   height: 5px;
-  background-color: #fbbf24; /* Amarelo ouro */
   border-radius: 50%;
-  box-shadow: 0 0 3px #fbbf24, 0 0 6px #fbbf24; /* Brilho em volta */
-  /* Centraliza a bolinha exatamente na coordenada que passarmos */
+  
+  /* NOVO: Adicione uma bordinha branca para destacar o miolo! */
+  border: 1px solid rgba(255, 255, 255, 0.8); 
+  
   transform: translate(-50%, -50%); 
-  animation: pulseDot 0.8s infinite alternate;
+  /* Diminuí o tempo de 0.8s para 0.5s para ela piscar mais rápido */
+  animation: pulseDot 0.5s infinite alternate; 
 }
 
 /* Animação para a bolinha pulsar */
 @keyframes pulseDot {
-  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.8); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+  /* Aumentei a escala de 1.3 para 1.8 para ela "inchar" mais */
+  0% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1.8); }
 }
 
-/* ==========================================================
-   4. POSIÇÕES DA BOLINHA (DEDOS ESQUERDOS)
-   Vá alterando 'top' e 'left' para colocar a bolinha em cima 
-   de cada dedo desenhado na sua sprite da mão esquerda.
-   ========================================================== */
-
+/* 4. POSIÇÕES */
 .pos-pinky-l { top: 13px; left: 6px; }
 .pos-ring-l { top: 7px; left: 25px; }
 .pos-middle-l { top: 7px; left: 44px; }
 .pos-index-l { top: 8px; left: 63px; }
-
-/* ==========================================================
-   5. POSIÇÕES DA BOLINHA (DEDOS DIREITOS)
-   ========================================================== */
 
 .pos-index-r { top: 8px; left: 29px; }
 .pos-middle-r { top: 8px; left: 20px; }

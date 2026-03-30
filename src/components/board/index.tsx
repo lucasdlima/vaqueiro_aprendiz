@@ -26,7 +26,7 @@ const Board = () => {
     }
   };
 
-  // Função 2: Chamada IMEDIATAMENTE quando uma letra errada é digitada
+  // Função 2: Chamada IMEDIATAMENTE quando uma palavra errada é finalizada
   const handleError = () => {
     setLives((vidasAtuais) => {
       const novasVidas = Math.max(0, vidasAtuais - 1);
@@ -47,11 +47,18 @@ const Board = () => {
   return (
     <div className="board-container">
       <img src={bgImage} alt="Cenário do jogo" className="board-bg" />
-      <img src={borda} alt="Borda decorativa" className="board-bg" />
+      
+      {/* AJUSTE AQUI: Nova classe exclusiva para a moldura! */}
+      <img src={borda} alt="Borda decorativa" className="board-border" /> 
+
       <div className="board-ui">
         
         {gameState !== 'playing' && (
-          <ResultScreen status={gameState} onRestart={restartGame} />
+          <ResultScreen 
+            status={gameState} 
+            onRestart={restartGame} 
+            lives={lives}
+          />
         )}
 
         <div className="top-bar">
