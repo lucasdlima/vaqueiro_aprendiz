@@ -16,7 +16,7 @@ const ALL_ANIMALS: AnimalType[] = [
 ];
 
 // 2. Número de animais por partida
-const ANIMALS_PER_GAME = 2;
+const ANIMALS_PER_GAME = 5;
 
 // Função auxiliar que embaralha a lista e pega a quantidade desejada
 const getRandomAnimals = (count: number): AnimalType[] => {

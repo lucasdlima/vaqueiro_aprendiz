@@ -5,7 +5,6 @@
   max-width: 800px;
   aspect-ratio: 288 / 208;
   margin: 0 auto;
-  /* border-radius: 16px; <-- Removido para deixar os cantos quadrados! */
   overflow: hidden; 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -19,15 +18,13 @@
   height: 100%;
   object-fit: cover;
   z-index: 0; 
-  image-rendering: pixelated; /* Garantindo que o cenário fique nítido também! */
+  image-rendering: pixelated;
 }
 
 /* A camada onde ficam os itens (Vidas, Animal, Texto, Teclado, Mãos) */
 .board-ui {
   position: relative;
   
-  /* ---> ALTERADO AQUI DE 1 PARA 3 <--- 
-     Isso garante que toda a interface fique NA FRENTE da moldura (que tem z-index 2) */
   z-index: 3; 
   
   display: flex;
@@ -42,11 +39,8 @@
   display: flex;
   justify-content: center; 
   width: 100%;
-  /* Se o pixel art original da moldura tiver um espacinho do topo, 
-     você pode adicionar um margin-top aqui depois. Por enquanto é zero. */
 }
 
-/* A Mágica da Proporção: Garante que a vida tenha exatamente 239px em relação aos 288px do fundo */
 .top-bar > div {
   width: 82.986%; /* Resultado de (239 / 288) * 100 */
 }
@@ -65,8 +59,6 @@
   justify-content: center;
   align-items: flex-end; 
   
-  /* AUMENTE este valor (ex: 20px) para empurrar o teclado mais para CIMA. */
-  /* DIMINUA este valor (ex: 0px) para colar o teclado mais perto da borda de BAIXO. */
   padding-bottom: 60px; 
 }
 
@@ -82,9 +74,8 @@
   /* Coloca a borda na frente de tudo (acima do z-index 1 da board-ui) */
   z-index: 2; 
   
-  /* CRUCIAL: Faz o mouse "atravessar" a borda. 
-     Se não colocar isso, você não consegue clicar no teclado! */
+  /* CRUCIAL: Faz o mouse "atravessar" a borda. */
   pointer-events: none; 
   
-  image-rendering: pixelated; /* Mantém a borda nítida */
+  image-rendering: pixelated; 
 }

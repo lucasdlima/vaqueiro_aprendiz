@@ -7,11 +7,8 @@
 
 /* Classe para a imagem de pixel art */
 .lifebar-image {
-  /* ESTA É A LINHA MÁGICA! 
-     Diz ao navegador para não suavizar a imagem. */
   image-rendering: pixelated; 
   
-  /* Mantém a proporção original */
   max-width: 100%;
   height: auto; 
 }

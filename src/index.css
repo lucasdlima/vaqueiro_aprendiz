@@ -18,7 +18,6 @@ body {
   margin: 0;
 }
 
-/* Mantém o seu layout centralizado em formato de "bloco" */
 #root {
   width: 1126px;
   max-width: 100%;
