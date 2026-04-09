@@ -1,0 +1,158 @@
+/* =========================================
+   ANIMAÇÕES DIVERTIDAS
+   ========================================= */
+
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatTitle {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL
+   ========================================= */
+
+.menu-ui {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  /* Garante que o conteúdo comece do centro */
+  justify-content: center; 
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: slideUpFade 0.5s ease-out; 
+}
+
+/* =========================================
+   CABEÇALHO E TÍTULO (Mais Centralizado e Maior)
+   ========================================= */
+
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* AUMENTAMOS AQUI: Empurra o título mais para o meio da tela (era 20px) */
+  margin-top: 50px; 
+  margin-bottom: 30px; 
+}
+
+.menu-title {
+  /* AUMENTAMOS AQUI: Fonte maior para destacar mais o Vaqueiro (era 46px) */
+  font-size: 56px; 
+  color: #ffde59; 
+  margin: 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 1px;
+  -webkit-text-stroke: 2px #5c2e0e; 
+  text-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6); 
+  animation: floatTitle 4s ease-in-out infinite; 
+}
+
+.menu-subtitle {
+  display: inline-block;
+  background-color: rgba(26, 26, 36, 0.85);
+  color: #ffffff;
+  font-size: 16px; /* Diminui levemente a plaquinha também */
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-top: 12px;
+  margin-bottom: 0px;
+  border: 2px solid #5c2e0e; 
+}
+
+/* =========================================
+   BOTÕES (Mais Delicados/Menores)
+   ========================================= */
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Aproximou um pouco os botões (era 20px) */
+  width: 100%;
+  max-width: 260px; /* Reduziu a largura máxima (era 280px) */
+}
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Diminuiu o espaço entre o emoji e o texto */
+  padding: 16px 0px; /* Botões mais finos/baixos (era 16px 20px) */
+  border-radius: 14px; /* Bordas levemente mais justas */
+  border: 4px solid #1a1a24;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: left;
+  font-family: inherit;
+}
+
+/* Cores específicas e Sombras (Diminuí o salto para acompanhar o tamanho) */
+.btn-copia {
+  background-color: #4ade80; 
+  box-shadow: 0 6px 0px #166534; 
+}
+
+.btn-ditado {
+  background-color: #60a5fa; 
+  box-shadow: 0 6px 0px #1e3a8a; 
+}
+
+/* --- EFEITOS DE INTERAÇÃO --- */
+.menu-btn:hover {
+  transform: translateY(-4px) scale(1.02); 
+  filter: brightness(1.1);
+  outline: 4px solid rgba(255, 255, 255, 0.5); 
+  outline-offset: 2px;
+}
+
+.btn-copia:hover { box-shadow: 0 10px 0px #166534; }
+.btn-ditado:hover { box-shadow: 0 10px 0px #1e3a8a; }
+
+.menu-btn:active {
+  transform: translateY(6px) scale(0.98); 
+  box-shadow: 0 0px 0px transparent !important; 
+  outline: none;
+}
+
+/* =========================================
+   CONTEÚDO DENTRO DO BOTÃO (Textos Reduzidos)
+   ========================================= */
+
+.btn-icon {
+  font-size: 32px; /* Emoji menor (era 38px) */
+  filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.4));
+  transition: transform 0.2s ease;
+}
+
+.menu-btn:hover .btn-icon {
+  transform: scale(1.15) rotate(-10deg);
+}
+
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  color: #1a1a24;
+}
+
+.btn-text strong {
+  font-size: 18px; /* Texto principal menor (era 22px) */
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.4); 
+}
+
+.btn-text small {
+  font-size: 13px; /* Subtexto menor (era 15px) */
+  font-weight: bold;
+  opacity: 0.85;
+}

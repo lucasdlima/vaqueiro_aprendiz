@@ -79,3 +79,51 @@
   
   image-rendering: pixelated; 
 }
+
+/* Botão de voltar ao menu (Estilo Game / Infantil) */
+.back-to-menu-btn {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+  
+  /* Flexbox garante que a setinha (⬅️) e o texto fiquem perfeitamente alinhados */
+  display: flex; 
+  align-items: center;
+  gap: 8px; 
+  
+  background-color: #ef4444; /* Vermelho vivo */
+  color: #ffffff;
+  
+  /* Borda mais grossa estilo cartoon (aumentado de 1px para 3px) */
+  border: 3px solid #7f1d1d; 
+  border-radius: 12px; /* Mais arredondado */
+  
+  padding: 8px 16px; /* Mais gordinho e fácil para crianças clicarem */
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  
+  /* Sombra 3D profunda + Brilho interno branco (dá volume ao botão) */
+  box-shadow: 0 6px 0 #7f1d1d, inset 0 3px 0 rgba(255, 255, 255, 0.2);
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+  
+  /* Transição elástica e suave */
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efeito ao passar o mouse por cima */
+.back-to-menu-btn:hover {
+  transform: translateY(-2px) scale(1.05); /* Pula e cresce de leve */
+  filter: brightness(1.1); /* Fica mais aceso */
+  box-shadow: 0 8px 0 #7f1d1d, inset 0 3px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Efeito de Clique (Afundar) */
+.back-to-menu-btn:active {
+  /* Afunda a exata quantidade da sombra para parecer físico */
+  transform: translateY(6px) scale(0.98); 
+  box-shadow: 0 0px 0 #7f1d1d, inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
