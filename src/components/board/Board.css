@@ -127,3 +127,37 @@
   transform: translateY(6px) scale(0.98); 
   box-shadow: 0 0px 0 #7f1d1d, inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
+
+/* Botão "Ouvir de novo" no Ditado */
+.replay-audio-btn {
+  position: absolute;
+  right: 80px; /* Joga para o lado do animal (ajuste conforme o tamanho do seu palco) */
+  top: 50%;
+  transform: translateY(-50%);
+  
+  background-color: #60a5fa; /* Azul do ditado */
+  color: white;
+  border: 3px solid #1e3a8a;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  
+  box-shadow: 0 4px 0 #1e3a8a;
+  transition: all 0.2s;
+  
+  /* Faz o botão pulsar devagar para chamar atenção que pode ser clicado */
+  animation: pulseAudio 2s infinite alternate; 
+}
+
+.replay-audio-btn:active {
+  transform: translateY(calc(-50% + 4px));
+  box-shadow: 0 0px 0 transparent;
+}
+
+@keyframes pulseAudio {
+  0% { transform: translateY(-50%) scale(1); }
+  100% { transform: translateY(-50%) scale(1.05); }
+}

@@ -7,9 +7,10 @@ interface WordInputProps {
   targetWord: string; 
   onSuccess?: () => void; 
   onError?: () => void;   
+  mode?: 'copia' | 'ditado'; // NOVO
 }
 
-const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
+const WordInput = ({ targetWord, onSuccess, onError, mode = 'copia' }: WordInputProps) => {
   const [typed, setTyped] = useState("");
   const expectedWord = targetWord.toLowerCase();
 
@@ -78,31 +79,34 @@ const WordInput = ({ targetWord, onSuccess, onError }: WordInputProps) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      
       <div className="word-input-container">
         <div className="stylized-word">
           {expectedWord.split("").map((char, index) => {
             let statusClass = "pending"; 
 
-            // Sua lógica de CSS original: pinta de verde se bater, vermelho se não bater
             if (index < typed.length) {
               statusClass = typed[index] === char ? "correct" : "incorrect";
             } else if (index === typed.length) {
               statusClass = "active";
             }
 
+            // 3. A MÁGICA DO DITADO AQUI:
+            // Se for ditado e a letra ainda não foi digitada, esconde a letra!
+            let displayChar = char;
+            if (mode === 'ditado' && (statusClass === 'pending' || statusClass === 'active')) {
+              displayChar = '_'; // Mostra um underline no lugar da letra
+            }
+
             return (
               <span key={index} className={`char ${statusClass}`}>
-                {char}
+                {displayChar}
               </span>
             );
           })}
         </div>
       </div>
 
-      {/* Renderiza o teclado e as mãos */}
-      <Keyboard nextChar={nextExpectedChar} />
-      
+      <Keyboard nextChar={nextExpectedChar} mode={mode} />
     </div>
   );
 };

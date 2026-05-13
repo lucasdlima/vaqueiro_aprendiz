@@ -25,13 +25,15 @@ export type AnimalType = 'bode' | 'vaca' | 'tatu' | 'sapo' | 'cachorro' | 'gato'
 
 interface AnimalProps {
   type: AnimalType;
+  silhouette?: boolean; // Recebe a ordem de virar sombra
 }
 
-const Animal = ({ type }: AnimalProps) => {
+const Animal = ({ type, silhouette = false }: AnimalProps) => {
   const currentImage = animalImages[type];
 
   return (
-    <div className="animal-container">
+    // Se silhouette for true, adiciona a classe 'shadow-mode' ao container
+    <div className={`animal-container ${silhouette ? 'shadow-mode' : ''}`}>
       <img 
         src={currentImage} 
         alt={`Imagem de um ${type}`} 

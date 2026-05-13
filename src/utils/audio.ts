@@ -34,3 +34,20 @@ export const playSound = (type: 'hit' | 'miss' | 'win' | 'lose') => {
   // O .catch evita que o React dê erro se o navegador bloquear o autoplay
   audio.play().catch((err) => console.log("Áudio bloqueado pelo navegador:", err));
 };
+
+export const speakWord = (word: string) => {
+  // Verifica se o navegador suporta a funcionalidade de voz
+  if ('speechSynthesis' in window) {
+    // Cancela qualquer fala anterior para não encavalar
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = 'pt-BR'; // Português do Brasil
+    utterance.rate = 0.8;     // Velocidade um pouco mais lenta (0.1 a 10, sendo 1 o normal)
+    utterance.pitch = 1.2;    // Tom um pouquinho mais agudo/infantil
+    
+    window.speechSynthesis.speak(utterance);
+  } else {
+    console.warn("Seu navegador não suporta a API de voz.");
+  }
+};

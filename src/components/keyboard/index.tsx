@@ -4,6 +4,7 @@ import HandsGuide from "../hands-guide";
 
 interface KeyboardProps {
   nextChar?: string; 
+  mode?: 'copia' | 'ditado';
 }
 
 const rows = [
@@ -35,10 +36,11 @@ const fingerClassMap: Record<string, string> = {
   'index-r': 'index', 'middle-r': 'middle', 'ring-r': 'ring', 'pinky-r': 'pinky',
 };
 
-const Keyboard = ({ nextChar }: KeyboardProps) => {
+// RECEBENDO O MODE AQUI:
+const Keyboard = ({ nextChar, mode = 'copia' }: KeyboardProps) => {
   const safeChar = nextChar ? nextChar.toLowerCase() : '';
 
-  // 3. CALCULA A COR EXATA DA LETRA ATUAL
+  // 3. CALCULA A COR EXATA DA LETRA ATUAL (Continua funcionando para as mãos)
   const activeFingerId = safeChar ? fingerMap[safeChar] : undefined;
   const activeFingerColor = activeFingerId ? fingerColorMap[activeFingerId] : undefined;
   const activeFingerClass = activeFingerId ? fingerClassMap[activeFingerId] : '';
@@ -51,12 +53,16 @@ const Keyboard = ({ nextChar }: KeyboardProps) => {
             {row.map((key) => {
               const isTarget = key === safeChar;
               
+              // 4. A MÁGICA DA MEIA-AJUDA:
+              // A tecla só ganha destaque SE for a letra certa E o modo não for ditado!
+              const shouldHighlightKey = isTarget && mode !== 'ditado';
+              
               return (
                 <div 
                   key={key} 
-                  className={`key ${isTarget ? 'target' : ''} ${isTarget ? activeFingerClass : ''}`}
-                  // 4. PINTA A TECLA COM A COR
-                  style={isTarget ? { backgroundColor: activeFingerColor } : {}}
+                  className={`key ${shouldHighlightKey ? 'target' : ''} ${shouldHighlightKey ? activeFingerClass : ''}`}
+                  // PINTA A TECLA APENAS SE DEVE TER DESTAQUE
+                  style={shouldHighlightKey ? { backgroundColor: activeFingerColor } : {}}
                 >
                   {key}
                 </div>
@@ -66,7 +72,7 @@ const Keyboard = ({ nextChar }: KeyboardProps) => {
         ))}
       </div>
 
-      {/* 5. ENVIA A COR PARA AS MÃOS */}
+      {/* 5. ENVIA A COR PARA AS MÃOS (Elas continuam acendendo independentemente do modo!) */}
       <HandsGuide activeFingerId={activeFingerId} activeFingerColor={activeFingerColor} />
       
     </div>

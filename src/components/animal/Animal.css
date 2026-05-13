@@ -12,3 +12,19 @@
   max-width: 30%;
   height: auto;
 }
+
+/* Transição para quando a sombra é REMOVIDA (o bicho se revela suavemente) */
+.pixel-art-image {
+  transition: filter 0.5s ease-out;
+  
+  /* (Mantenha aqui as suas propriedades de width, height, etc que já existiam) */
+  /* width: 100%; */
+  /* image-rendering: pixelated; */
+}
+
+/* Quando a classe shadow-mode é ADICIONADA, fica preto INSTANTANEAMENTE */
+.animal-container.shadow-mode .pixel-art-image {
+  transition: none; /* <-- ISSO AQUI RESOLVE O FLASH COLORIDO! */
+  filter: brightness(0) drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.4));
+  animation: none; 
+}
