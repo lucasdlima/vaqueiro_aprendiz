@@ -5,30 +5,36 @@ import borda from '../../assets/borda.png';
 import { playSound } from "../../utils/audio";
 
 interface MainMenuProps {
-  onSelectMode: (mode: 'copia' | 'ditado') => void;
+  onSelectMode: (mode: 'copia' | 'ditado' | 'tutorial') => void;
 }
 
 const MainMenu = ({ onSelectMode }: MainMenuProps) => {
   
-  const handleSelect = (mode: 'copia' | 'ditado') => {
-    playSound('hit'); // Toca o som agradável ao clicar
+  const handleSelect = (mode: 'copia' | 'ditado' | 'tutorial') => {
+    playSound('hit'); 
     onSelectMode(mode);
   };
 
   return (
     <div className="board-container">
-      {/* O mesmo fundo do jogo */}
       <img src={bgImage} alt="Cenário de fundo" className="board-bg" />
       <img src={borda} alt="Borda decorativa" className="board-border" />
 
       <div className="menu-ui">
+        
         <div className="menu-header">
           <h1 className="menu-title">O Vaqueiro<br/>Aprendiz!</h1>
-          <p className="menu-subtitle">Escolha como quer jogar:</p>
+          
+          {/* NOVO: Botão de tutorial no lugar do subtítulo! */}
+          <button 
+            className="tutorial-header-btn" 
+            onClick={() => handleSelect('tutorial')}
+          >
+            📖 Como Jogar
+          </button>
         </div>
 
         <div className="menu-buttons">
-          {/* Botão da Fase Cópia */}
           <button 
             className="menu-btn btn-copia" 
             onClick={() => handleSelect('copia')}
@@ -40,7 +46,6 @@ const MainMenu = ({ onSelectMode }: MainMenuProps) => {
             </span>
           </button>
 
-          {/* Botão da Fase Ditado */}
           <button 
             className="menu-btn btn-ditado" 
             onClick={() => handleSelect('ditado')}
@@ -52,6 +57,7 @@ const MainMenu = ({ onSelectMode }: MainMenuProps) => {
             </span>
           </button>
         </div>
+        
       </div>
     </div>
   );

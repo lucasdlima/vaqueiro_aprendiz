@@ -73,6 +73,39 @@
 }
 
 /* =========================================
+   BOTÃO DE TUTORIAL (Abaixo do Título)
+   ========================================= */
+.tutorial-header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #fb923c; /* Laranja divertido */
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 24px; /* Formato de pílula */
+  margin-top: 16px;
+  border: 3px solid #c2410c; /* Borda laranja escura */
+  cursor: pointer;
+  box-shadow: 0 5px 0px #c2410c, inset 0 3px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: inherit;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.tutorial-header-btn:hover {
+  transform: translateY(-2px) scale(1.05); /* Pula e cresce */
+  filter: brightness(1.1);
+}
+
+.tutorial-header-btn:active {
+  transform: translateY(5px) scale(0.95); /* Afunda ao clicar */
+  box-shadow: 0 0px 0px transparent;
+}
+
+/* =========================================
    BOTÕES (Mais Delicados/Menores)
    ========================================= */
 
